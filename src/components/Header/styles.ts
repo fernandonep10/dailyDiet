@@ -38,7 +38,7 @@ export const scoreBoardContainer = styled(View)<scoreBoardProps>`
     width: "100%";
     margin: ${type === "statsIsOn" ? "0" : "33px 24px"};
     background-color: ${theme.COLORS.GREEN_LIGHT};
-    height: ${type === "statsIsOn" ? "144px" : "102px"};
+    height: ${type === "statsIsOn" ? "180px" : "102px"};
     border-radius: 6px;
     align-items: center;
     justify-content: center;
@@ -76,7 +76,7 @@ export const goToScoreIcon = styled(ArrowUpRight).attrs(({ theme }) => ({
 export const goHomeButton = styled(TouchableOpacity)`
   flex: 1;
   position: absolute;
-  top: 8px;
+  top: 35px;
   left: 24px;
 `;
 

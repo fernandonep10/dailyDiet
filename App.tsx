@@ -1,5 +1,11 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
+import { StatusBar } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator,
+  SafeAreaView,
+} from "react-native";
 import { ThemeProvider } from "styled-components/native";
 import {
   useFonts,
@@ -7,6 +13,7 @@ import {
   NunitoSans_700Bold,
 } from "@expo-google-fonts/nunito-sans";
 import Home from "@screens/Home";
+import Stats from "@screens/Stats";
 import theme from "@theme/index";
 
 export default function App() {
@@ -17,7 +24,13 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {fontsLoaded ? <Home /> : <ActivityIndicator />}
+      {/* <SafeAreaView style={{ flex: 1 }}> */}
+      {/* <StatusBar
+          barStyle={"light-content"}
+          backgroundColor={theme.COLORS.WHITE}
+        /> */}
+      {fontsLoaded ? <Stats /> : <ActivityIndicator />}
+      {/* </SafeAreaView> */}
     </ThemeProvider>
   );
 }
