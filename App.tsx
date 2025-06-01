@@ -1,11 +1,4 @@
-import { StatusBar } from "react-native";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ActivityIndicator,
-  SafeAreaView,
-} from "react-native";
+import { ActivityIndicator } from "react-native";
 import { ThemeProvider } from "styled-components/native";
 import {
   useFonts,
@@ -14,6 +7,7 @@ import {
 } from "@expo-google-fonts/nunito-sans";
 import Home from "@screens/Home";
 import Stats from "@screens/Stats";
+import MealDetails from "@screens/MealDetails";
 import theme from "@theme/index";
 
 export default function App() {
@@ -24,13 +18,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <SafeAreaView style={{ flex: 1 }}> */}
-      {/* <StatusBar
-          barStyle={"light-content"}
-          backgroundColor={theme.COLORS.WHITE}
-        /> */}
-      {fontsLoaded ? <Stats /> : <ActivityIndicator />}
-      {/* </SafeAreaView> */}
+      {fontsLoaded ? <MealDetails /> : <ActivityIndicator />}
     </ThemeProvider>
   );
 }
