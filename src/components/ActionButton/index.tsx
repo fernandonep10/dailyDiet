@@ -5,7 +5,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 type actionButtonProps = TouchableOpacityProps & {
   title: string;
-  icon: keyof typeof MaterialIcons.glyphMap;
+  icon?: keyof typeof MaterialIcons.glyphMap;
 };
 export default function ActionButton({
   title,
@@ -14,7 +14,7 @@ export default function ActionButton({
 }: actionButtonProps) {
   return (
     <S.actionButton>
-      <ActionButtonIcon icon={icon} />
+      {icon && <ActionButtonIcon icon={icon} />}
       <S.actionButtonText>{title}</S.actionButtonText>
     </S.actionButton>
   );
