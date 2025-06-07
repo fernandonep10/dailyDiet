@@ -8,6 +8,7 @@ import {
 import Home from "@screens/Home";
 import Stats from "@screens/Stats";
 import MealDetails from "@screens/MealDetails";
+import MealFeedback from "@screens/MealFeedback";
 import theme from "@theme/index";
 
 export default function App() {
@@ -18,7 +19,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {fontsLoaded ? <MealDetails /> : <ActivityIndicator />}
+      {fontsLoaded ? <MealFeedback type="SECONDARY" /> : <ActivityIndicator />}
     </ThemeProvider>
   );
 }
