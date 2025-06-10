@@ -13,7 +13,7 @@ export default function ActionButton({
   ...rest
 }: actionButtonProps) {
   return (
-    <S.actionButton>
+    <S.actionButton {...rest}>
       {icon && <ActionButtonIcon icon={icon} />}
       <S.actionButtonText>{title}</S.actionButtonText>
     </S.actionButton>

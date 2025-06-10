@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components/native";
 import { TextInput, TouchableOpacity } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
-import { onOffDietStyleProps } from "./types";
 
 export const Container = styled.View`
   flex: 1;
@@ -78,49 +77,5 @@ export const DateTimeInput = styled(TextInputMask).attrs({})`
     max-height: 50px;
     border-radius: 6px;
     width: 100%;
-  `};
-`;
-
-export const OnDietContainer = styled(TouchableOpacity)<onOffDietStyleProps>`
-  ${({ theme, type }) => css`
-    background-color: ${type === "PRIMARY"
-      ? theme.COLORS.GRAY_6
-      : theme.COLORS.GREEN_LIGHT};
-    border: 1px;
-    border-color: ${type === "PRIMARY"
-      ? theme.COLORS.GRAY_6
-      : theme.COLORS.GREEN_DARK};
-    min-height: 50px;
-    max-height: 50px;
-    border-radius: 6px;
-    width: 50%;
-    align-items: center;
-    justify-content: center;
-  `}
-`;
-
-export const OffDietContainer = styled(TouchableOpacity)<onOffDietStyleProps>`
-  ${({ theme, type }) => css`
-    background-color: ${type === "PRIMARY"
-      ? theme.COLORS.GRAY_6
-      : theme.COLORS.RED_LIGHT};
-    border: 1px;
-    border-color: ${type === "PRIMARY"
-      ? theme.COLORS.GRAY_6
-      : theme.COLORS.RED_DARK};
-    min-height: 50px;
-    max-height: 50px;
-    border-radius: 6px;
-    width: 50%;
-    align-items: center;
-    justify-content: center;
-  `}
-`;
-
-export const OnOffDietLabel = styled.Text`
-  ${({ theme }) => css`
-    color: ${theme.COLORS.GRAY_2};
-    font-family: ${theme.FONT_FAMILY.BOLD};
-    font-size: ${theme.FONT_SIZE.MD}px;
   `};
 `;

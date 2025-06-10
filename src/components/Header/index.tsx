@@ -1,12 +1,23 @@
 import * as S from "./styles";
 import logoImg from "@assets/logo.png";
 import profile from "@assets/profile.png";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   type: "statsIsOn" | "statsIsOff";
 };
 
 export default function Header({ type }: Props) {
+  const navigation = useNavigation();
+
+  function handleStats() {
+    navigation.navigate("stats");
+  }
+
+  function handleHome() {
+    navigation.navigate("home");
+  }
+
   return (
     <S.Container>
       {type === "statsIsOff" && (
@@ -21,11 +32,11 @@ export default function Header({ type }: Props) {
         <S.scoreBoardSub>das refeições dentro da dieta</S.scoreBoardSub>
 
         {type === "statsIsOff" ? (
-          <S.goToScoreButton>
+          <S.goToScoreButton onPress={handleStats}>
             <S.goToScoreIcon />
           </S.goToScoreButton>
         ) : (
-          <S.goHomeButton>
+          <S.goHomeButton onPress={handleHome}>
             <S.goHomeIcon />
           </S.goHomeButton>
         )}

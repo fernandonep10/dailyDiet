@@ -3,6 +3,7 @@ import Header from "@components/Header";
 import ActionButton from "@components/ActionButton";
 import { useState, useEffect } from "react";
 import MealList, { MealListSectionsPropsData } from "@components/MealsList";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
   const [meals, setMeals] = useState<MealListSectionsPropsData[]>([
@@ -24,12 +25,22 @@ export default function Home() {
     },
   ]);
 
+  const navigation = useNavigation();
+
+  function handleNewMeal() {
+    navigation.navigate("mealDetails");
+  }
+
   return (
     <S.ContainerHeader>
       <Header type="statsIsOff" />
       <S.CotainerBody>
         <S.mealsLabel>Refeições</S.mealsLabel>
-        <ActionButton title="Nova Refeição" icon="add" />
+        <ActionButton
+          title="Nova Refeição"
+          icon="add"
+          onPress={handleNewMeal}
+        />
         <MealList sections={meals} />
       </S.CotainerBody>
     </S.ContainerHeader>

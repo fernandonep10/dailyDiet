@@ -1,0 +1,15 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { mealGetByDay } from "@storage/meal/mealGetByDay";
+
+import { mealProps } from "@type/data";
+
+export async function mealCreate(params: mealProps) {
+  try {
+    const storage = await mealGetByDay(params.date);
+    storage.push(params);
+
+    await AsyncStorage.setItem(`meals-${params.date}`, JSON.stringify(storage));
+  } catch (error) {
+    throw error;
+  }
+}

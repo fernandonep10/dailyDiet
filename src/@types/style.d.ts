@@ -6,3 +6,9 @@ declare module "styled-components/native" {
 
   export interface DefaultTheme extends ThemeType {}
 }
+
+export type onOffDietStylePropsOptions = "ONDIET" | "OFFDIET" | undefined;
+
+export type feedbackStyleProps = {
+  type: onOffDietStylePropsOptions;
+};

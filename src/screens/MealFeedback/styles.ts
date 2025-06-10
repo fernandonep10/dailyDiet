@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components/native";
 import { Text } from "react-native";
-import { feedbackProps } from "./types";
+
+import { feedbackStyleProps } from "@type/style";
 
 export const Container = styled.View`
   flex: 1;
@@ -13,11 +14,11 @@ export const feedbackContainer = styled.View`
   justify-content: center;
 `;
 
-export const Title = styled(Text)<feedbackProps>`
+export const Title = styled(Text)<feedbackStyleProps>`
   ${({ theme, type }) => css`
     font-size: ${theme.FONT_SIZE.XL}px;
     font-family: ${theme.FONT_FAMILY.BOLD};
-    color: ${type === "PRIMARY"
+    color: ${type === "ONDIET"
       ? theme.COLORS.GREEN_DARK
       : theme.COLORS.RED_DARK};
   `}
