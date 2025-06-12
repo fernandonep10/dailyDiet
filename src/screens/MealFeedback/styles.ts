@@ -36,6 +36,6 @@ export const SubTitle = styled.Text`
 
 export const Illustration = styled.Image`
   width: 288px;
-  height: 385;
+  height: 385px;
   margin-top: 40px;
 `;

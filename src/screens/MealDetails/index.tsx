@@ -1,7 +1,7 @@
 import HeaderBasic from "@components/HeaderBasic";
 import theme from "@theme/index";
 import * as S from "./styles";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import { useEffect, useState } from "react";
 import ActionButton from "@components/ActionButton";
 import OnOffDietButton from "@components/onOffDietButton";
@@ -10,6 +10,7 @@ import { onOffDietStylePropsOptions } from "@type/style";
 import { mealCreate } from "@storage/meal/mealCreate";
 import { mealProps } from "@type/data";
 import { useNavigation } from "@react-navigation/native";
+import { AppError } from "@utils/AppError";
 
 export default function MealDetails() {
   const [mealData, setMealData] = useState<mealProps>({
@@ -30,10 +31,18 @@ export default function MealDetails() {
   }
 
   async function handleNewMeal() {
-    await mealCreate(mealData);
-    console.log("Refeição cadastradas com sucesso");
-
-    navigation.navigate("mealFeedback", { type: mealData.type });
+    try {
+      await mealCreate(mealData);
+      console.log("Refeição cadastradas com sucesso");
+      navigation.navigate("mealFeedback", { type: mealData.type });
+    } catch (error) {
+      if (error instanceof AppError) {
+        Alert.alert("Nova Refeição", error.message);
+      } else {
+        Alert.alert("Nova Refeição", "Não foi possível cadastrar a refeição.");
+      }
+      console.log(error);
+    }
   }
 
   useEffect(() => {
