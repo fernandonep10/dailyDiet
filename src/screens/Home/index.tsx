@@ -1,35 +1,42 @@
 import * as S from "./styles";
 import Header from "@components/Header";
 import ActionButton from "@components/ActionButton";
-import { useState, useEffect } from "react";
+import Loading from "@components/Loading";
+import { useState, useCallback } from "react";
 import MealList, { MealListSectionsPropsData } from "@components/MealsList";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { mealsGetAll } from "@storage/meal/mealsGetAll";
+import { transformMealsToSectionList } from "@utils/index";
 
 export default function Home() {
-  const [meals, setMeals] = useState<MealListSectionsPropsData[]>([
-    {
-      title: "12.08.30",
-      data: [
-        { time: "20:00", title: "X-tudo", type: "RED" },
-        { time: "20:01", title: "X-tudo", type: "RED" },
-        { time: "20:02", title: "X-tudo", type: "RED" },
-      ],
-    },
-    {
-      title: "11.08.22",
-      data: [
-        { time: "20:03", title: "X-tudo", type: "RED" },
-        { time: "20:04", title: "X-tudo", type: "RED" },
-        { time: "20:05", title: "X-tudo", type: "RED" },
-      ],
-    },
-  ]);
+  const [meals, setMeals] = useState<MealListSectionsPropsData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigation = useNavigation();
+
+  async function fetchMeals() {
+    try {
+      setIsLoading(true);
+      const mealData = await mealsGetAll();
+
+      const mealTreated = transformMealsToSectionList(mealData);
+
+      setMeals(mealTreated);
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   function handleNewMeal() {
     navigation.navigate("mealDetails");
   }
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchMeals();
+    }, [])
+  );
 
   return (
     <S.ContainerHeader>
@@ -41,7 +48,7 @@ export default function Home() {
           icon="add"
           onPress={handleNewMeal}
         />
-        <MealList sections={meals} />
+        {isLoading ? <Loading /> : <MealList sections={meals} />}
       </S.CotainerBody>
     </S.ContainerHeader>
   );

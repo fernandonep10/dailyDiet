@@ -41,7 +41,7 @@ export const MealLabel = styled.Text`
 
 export const Class = styled(Circle).attrs<MealCardStyleitemProps>(
   ({ theme, type }) => ({
-    color: type === "RED" ? theme.COLORS.RED_MID : theme.COLORS.GREEN_MID,
+    color: type === "OFFDIET" ? theme.COLORS.RED_MID : theme.COLORS.GREEN_MID,
     size: 24,
     weight: "fill",
   })

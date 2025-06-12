@@ -7,6 +7,9 @@ export const List = styled(
   SectionList<MealCardPropsData, MealListSectionsPropsData>
 ).attrs(() => ({
   showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    paddingBottom: 50, // aqui funciona!
+  },
 }))``;
 
 export const HeaderList = styled.Text`

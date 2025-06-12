@@ -1,6 +1,6 @@
 import { TouchableOpacityProps } from "react-native";
 
-export type MealCardStyleProps = "RED" | "GREEN";
+export type MealCardStyleProps = "ONDIET" | "OFFDIET";
 
 export type MealCardStyleitemProps = {
   type: MealCardStyleProps;
