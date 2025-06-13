@@ -10,6 +10,8 @@ export type MealCardPropsData = {
   time: string;
   title: string;
   type: MealCardStyleProps;
+  id: string;
+  date: string;
 };
 
 export type MealCardProps = MealCardPropsData & TouchableOpacityProps;

@@ -45,6 +45,8 @@ export function transformMealsToSectionList(allMeals: any[]) {
         time: meal.time,
         title: meal.name,
         type: meal.type || "UNKNOWN",
+        id: meal.id,
+        date: meal.date,
       });
 
       return acc;

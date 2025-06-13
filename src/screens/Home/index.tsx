@@ -6,6 +6,7 @@ import { useState, useCallback } from "react";
 import MealList, { MealListSectionsPropsData } from "@components/MealsList";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { mealsGetAll } from "@storage/meal/mealsGetAll";
+import { mealsClearAll } from "@storage/meal/mealClearAll";
 import { transformMealsToSectionList } from "@utils/index";
 
 export default function Home() {
@@ -16,6 +17,9 @@ export default function Home() {
 
   async function fetchMeals() {
     try {
+      //Descomente para limpar todas:
+      //await mealsClearAll();
+
       setIsLoading(true);
       const mealData = await mealsGetAll();
 
@@ -29,7 +33,7 @@ export default function Home() {
   }
 
   function handleNewMeal() {
-    navigation.navigate("mealDetails");
+    navigation.navigate("mealDetails", {});
   }
 
   useFocusEffect(

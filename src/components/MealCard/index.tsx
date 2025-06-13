@@ -8,7 +8,7 @@ export default function MealCard({
   ...rest
 }: MealCardProps) {
   return (
-    <S.Container>
+    <S.Container {...rest}>
       <S.TimeLabel> {time} </S.TimeLabel>
       <S.Separator />
       <S.MealLabel> {title}</S.MealLabel>

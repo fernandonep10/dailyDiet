@@ -3,25 +3,36 @@ import theme from "@theme/index";
 import * as S from "./styles";
 import { Alert, View } from "react-native";
 import { useEffect, useState } from "react";
+
 import ActionButton from "@components/ActionButton";
 import OnOffDietButton from "@components/onOffDietButton";
 import { ActionButtonIcon } from "@components/ActionButtonIcon";
 import { onOffDietStylePropsOptions } from "@type/style";
-import { mealCreate } from "@storage/meal/mealCreate";
+import * as Crypto from "expo-crypto";
+import { mealCreateOrUpdate } from "@storage/meal/mealCreateOrUpdate";
 import { mealProps } from "@type/data";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { AppError } from "@utils/AppError";
+import { mealGetByIdAndDate } from "@storage/meal/mealGetByIdAndDate";
+
+type RouteParams = {
+  id: string;
+  date: string;
+};
 
 export default function MealDetails() {
+  const route = useRoute();
+  const navigation = useNavigation();
+  const meal = route.params as RouteParams;
+
   const [mealData, setMealData] = useState<mealProps>({
+    id: Crypto.randomUUID(),
     name: "",
     description: "",
     date: "",
     time: "",
     type: undefined, // ou 'ON_DIET' como default
   });
-
-  const navigation = useNavigation();
 
   function updateMealField<K extends keyof mealProps>(
     field: K,
@@ -32,21 +43,37 @@ export default function MealDetails() {
 
   async function handleNewMeal() {
     try {
-      await mealCreate(mealData);
-      console.log("Refeição cadastradas com sucesso");
+      await mealCreateOrUpdate(mealData);
       navigation.navigate("mealFeedback", { type: mealData.type });
     } catch (error) {
       if (error instanceof AppError) {
         Alert.alert("Nova Refeição", error.message);
       } else {
         Alert.alert("Nova Refeição", "Não foi possível cadastrar a refeição.");
+        console.log(error);
       }
+    }
+  }
+
+  async function fetchMealByIdAndDate(id: string, date: string) {
+    try {
+      const meal = await mealGetByIdAndDate(id, date);
+      if (meal) {
+        setMealData(meal);
+      }
+    } catch (error) {
       console.log(error);
+      Alert.alert(
+        "Recuperar Refeição",
+        "Não foi possível recuperar esta refeição!"
+      );
     }
   }
 
   useEffect(() => {
-    // setMealStatus("OFFDIET");
+    if (meal.id !== undefined) {
+      fetchMealByIdAndDate(meal.id, meal.date);
+    }
   }, []);
 
   return (
