@@ -13,13 +13,13 @@ export async function mealsGetAll(): Promise<mealProps[]> {
     const keyValuePairs = await AsyncStorage.multiGet(mealKeys);
 
     // 4. Transforma os valores JSON em objetos
-    const allMeals = keyValuePairs.flatMap(([key, value]) => {
+    const allMeals = keyValuePairs.flatMap<mealProps>(([key, value]) => {
       if (value) {
         try {
           const meals = JSON.parse(value);
           // Pode ser um array ou objeto, depende de como você salvou
 
-          return Object.values(meals);
+          return Object.values(meals) as mealProps[];
         } catch (e) {
           console.warn(`Erro ao parsear dados de ${key}:`, e);
           return [];

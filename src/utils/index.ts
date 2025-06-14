@@ -1,5 +1,6 @@
 import theme from "@theme/index";
 import { mealProps } from "@type/data";
+import { onOffDietStylePropsOptions } from "@type/style";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
@@ -87,7 +88,8 @@ export function scoreBoardStats(meals: mealProps[]) {
           maximumFractionDigits: 2,
         });
 
-  const situation = (onDiet / total) * 100 >= 80 ? "ONDIET" : "OFFDIET";
+  const situation: onOffDietStylePropsOptions =
+    (onDiet / total) * 100 >= 80 ? "ONDIET" : "OFFDIET";
 
   // Ordena as refeições por data e hora para garantir sequência correta
   const sortedMeals = [...meals].sort((a, b) => {

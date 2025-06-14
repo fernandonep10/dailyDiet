@@ -3,6 +3,7 @@ import logoImg from "@assets/logo.png";
 import profile from "@assets/profile.png";
 import { useNavigation } from "@react-navigation/native";
 import { ScoreBoardStats } from "@type/data";
+import { Text } from "react-native";
 
 type Props = {
   type: "statsIsOn" | "statsIsOff";
@@ -35,11 +36,11 @@ export default function Header({ type, stats }: Props) {
 
         {type === "statsIsOff" ? (
           <S.goToScoreButton onPress={handleStats}>
-            <S.goToScoreIcon />
+            <S.goToScoreIcon color={stats.situation} />
           </S.goToScoreButton>
         ) : (
           <S.goHomeButton onPress={handleHome}>
-            <S.goHomeIcon />
+            <S.goHomeIcon color={stats.situation} />
           </S.goHomeButton>
         )}
       </S.scoreBoardContainer>

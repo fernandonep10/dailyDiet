@@ -72,9 +72,9 @@ export const goToScoreButton = styled(TouchableOpacity)`
   right: 8px;
 `;
 
-export const goToScoreIcon = styled(ArrowUpRight).attrs(({ theme }) => ({
+export const goToScoreIcon = styled(ArrowUpRight).attrs(({ theme, color }) => ({
   size: 32,
-  color: theme.COLORS.GREEN_DARK,
+  color: color === "ONDIET" ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK,
 }))``;
 
 export const goHomeButton = styled(TouchableOpacity)`
@@ -84,7 +84,7 @@ export const goHomeButton = styled(TouchableOpacity)`
   left: 24px;
 `;
 
-export const goHomeIcon = styled(ArrowLeft).attrs(({ theme }) => ({
+export const goHomeIcon = styled(ArrowLeft).attrs(({ theme, color }) => ({
   size: 32,
-  color: theme.COLORS.GREEN_DARK,
+  color: color === "ONDIET" ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK,
 }))``;
