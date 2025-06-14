@@ -1,8 +1,8 @@
-import { TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import styled from "styled-components/native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export const Container = styled(TouchableOpacity)`
+export const Container = styled(View)`
   width: 56px;
   width: 56px;
 

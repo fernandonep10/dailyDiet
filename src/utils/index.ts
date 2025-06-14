@@ -1,4 +1,8 @@
 import theme from "@theme/index";
+import { mealProps } from "@type/data";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 
 export function getDietColors(dietType?: string, label?: string) {
   if (dietType === undefined) {
@@ -69,4 +73,53 @@ export function transformMealsToSectionList(allMeals: any[]) {
     });
 
   return result;
+}
+
+export function scoreBoardStats(meals: mealProps[]) {
+  const total = meals.length;
+  const onDiet = meals.filter((meal) => meal.type === "ONDIET").length;
+  const offDiet = meals.filter((meal) => meal.type === "OFFDIET").length;
+  const percentage =
+    total === 0
+      ? "0,00"
+      : ((onDiet / total) * 100).toLocaleString("pt-BR", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+
+  const situation = (onDiet / total) * 100 >= 80 ? "ONDIET" : "OFFDIET";
+
+  // Ordena as refeições por data e hora para garantir sequência correta
+  const sortedMeals = [...meals].sort((a, b) => {
+    const dateA = `${a.date} ${a.time}`;
+    const dateB = `${b.date} ${b.time}`;
+    return dateA.localeCompare(dateB, "pt-BR");
+  });
+
+  let maxSequence = 0;
+  let currentSequence = 0;
+
+  for (const meal of sortedMeals) {
+    if (meal.type === "ONDIET") {
+      currentSequence++;
+      if (currentSequence > maxSequence) {
+        maxSequence = currentSequence;
+      }
+    } else {
+      currentSequence = 0;
+    }
+  }
+
+  return {
+    percentage,
+    total,
+    onDiet,
+    offDiet,
+    situation,
+    maxSequence,
+  };
+}
+
+export function isValidDateTime(date: string, time: string): boolean {
+  return dayjs(`${date} ${time}`, "DD/MM/YYYY HH:mm", true).isValid();
 }

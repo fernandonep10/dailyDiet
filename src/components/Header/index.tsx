@@ -2,16 +2,18 @@ import * as S from "./styles";
 import logoImg from "@assets/logo.png";
 import profile from "@assets/profile.png";
 import { useNavigation } from "@react-navigation/native";
+import { ScoreBoardStats } from "@type/data";
 
 type Props = {
   type: "statsIsOn" | "statsIsOff";
+  stats: ScoreBoardStats;
 };
 
-export default function Header({ type }: Props) {
+export default function Header({ type, stats }: Props) {
   const navigation = useNavigation();
 
   function handleStats() {
-    navigation.navigate("stats");
+    navigation.navigate("stats", { stats });
   }
 
   function handleHome() {
@@ -27,8 +29,8 @@ export default function Header({ type }: Props) {
         </S.ContainerLogoProfile>
       )}
 
-      <S.scoreBoardContainer type={type}>
-        <S.scoreBoard>90,86%</S.scoreBoard>
+      <S.scoreBoardContainer type={type} stats={stats}>
+        <S.scoreBoard>{stats.percentage}%</S.scoreBoard>
         <S.scoreBoardSub>das refeições dentro da dieta</S.scoreBoardSub>
 
         {type === "statsIsOff" ? (

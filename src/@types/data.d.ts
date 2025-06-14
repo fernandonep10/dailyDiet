@@ -8,3 +8,12 @@ export type mealProps = {
   time: string;
   type: onOffDietStylePropsOptions;
 };
+
+export type ScoreBoardStats = {
+  percentage: string;
+  total: number;
+  onDiet: number;
+  offDiet: number;
+  situation: onOffDietStylePropsOptions;
+  maxSequence: number;
+};

@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { mealProps } from "@type/data";
 
-export async function mealsGetAll() {
+export async function mealsGetAll(): Promise<mealProps[]> {
   try {
     // 1. Pega todas as chaves salvas
     const allKeys = await AsyncStorage.getAllKeys();
@@ -17,6 +18,7 @@ export async function mealsGetAll() {
         try {
           const meals = JSON.parse(value);
           // Pode ser um array ou objeto, depende de como você salvou
+
           return Object.values(meals);
         } catch (e) {
           console.warn(`Erro ao parsear dados de ${key}:`, e);

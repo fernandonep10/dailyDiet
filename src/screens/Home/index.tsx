@@ -7,9 +7,20 @@ import MealList, { MealListSectionsPropsData } from "@components/MealsList";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { mealsGetAll } from "@storage/meal/mealsGetAll";
 import { mealsClearAll } from "@storage/meal/mealClearAll";
-import { transformMealsToSectionList } from "@utils/index";
+import { transformMealsToSectionList, scoreBoardStats } from "@utils/index";
+import { mealProps } from "@type/data";
+import { ScoreBoardStats } from "@type/data";
 
 export default function Home() {
+  const [scoreBord, setScoreBord] = useState<ScoreBoardStats>({
+    percentage: "0,00",
+    total: 0,
+    onDiet: 0,
+    offDiet: 0,
+    situation: undefined,
+    maxSequence: 0,
+  });
+
   const [meals, setMeals] = useState<MealListSectionsPropsData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -21,7 +32,12 @@ export default function Home() {
       //await mealsClearAll();
 
       setIsLoading(true);
-      const mealData = await mealsGetAll();
+      const mealData: mealProps[] = await mealsGetAll();
+      const scoreBordStats = scoreBoardStats(mealData);
+
+      console.log(mealData);
+
+      setScoreBord(scoreBordStats);
 
       const mealTreated = transformMealsToSectionList(mealData);
 
@@ -44,7 +60,7 @@ export default function Home() {
 
   return (
     <S.ContainerHeader>
-      <Header type="statsIsOff" />
+      <Header type={"statsIsOff"} stats={scoreBord} />
       <S.CotainerBody>
         <S.mealsLabel>Refeições</S.mealsLabel>
         <ActionButton

@@ -1,11 +1,13 @@
 import styled, { css } from "styled-components/native";
 import { TouchableOpacity, View } from "react-native";
 import { ArrowUpRight, ArrowLeft } from "phosphor-react-native";
+import { ScoreBoardStats } from "@type/data";
 
 export type scoreBoardTypeStyleProps = "statsIsOn" | "statsIsOff";
 
 type scoreBoardProps = {
   type: scoreBoardTypeStyleProps;
+  stats: ScoreBoardStats;
 };
 
 export const Container = styled.View`
@@ -34,10 +36,12 @@ export const ProfilePhoto = styled.Image`
 `;
 
 export const scoreBoardContainer = styled(View)<scoreBoardProps>`
-  ${({ type, theme }) => css`
+  ${({ type, theme, stats }) => css`
     width: "100%";
     margin: ${type === "statsIsOn" ? "0" : "33px 24px"};
-    background-color: ${theme.COLORS.GREEN_LIGHT};
+    background-color: ${stats.situation === "ONDIET"
+      ? theme.COLORS.GREEN_LIGHT
+      : theme.COLORS.RED_LIGHT};
     height: ${type === "statsIsOn" ? "180px" : "102px"};
     border-radius: 6px;
     align-items: center;

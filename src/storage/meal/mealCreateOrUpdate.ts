@@ -3,6 +3,7 @@ import { mealGetByDay } from "@storage/meal/mealGetByDay";
 
 import { mealProps } from "@type/data";
 import { AppError } from "@utils/AppError";
+import { isValidDateTime } from "@utils/index";
 
 export async function mealCreateOrUpdate(params: mealProps) {
   try {
@@ -17,7 +18,13 @@ export async function mealCreateOrUpdate(params: mealProps) {
       throw new AppError("Preencha todas as informações da refeição!");
     }
 
+    if (!isValidDateTime(params.date, params.time)) {
+      throw new AppError("Preencha uma data e hora válida!");
+    }
+
     const storage: mealProps[] = await mealGetByDay(params.date);
+
+    // ------  Validando se é uma inserção ou alteração ------ //
 
     // Procura o índice da refeição com o mesmo id
     const mealIndex = storage.findIndex((meal) => meal.id === params.id);
@@ -29,8 +36,6 @@ export async function mealCreateOrUpdate(params: mealProps) {
       // Se não encontrou, adiciona uma nova
       storage.push(params);
     }
-
-    await AsyncStorage.setItem(`meals-${params.date}`, JSON.stringify(storage));
 
     await AsyncStorage.setItem(`meals-${params.date}`, JSON.stringify(storage));
   } catch (error) {
