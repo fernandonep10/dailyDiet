@@ -4,6 +4,7 @@ import StatsCardLarge from "@components/StatsCardLarge";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import theme from "@theme/index";
 import { ScoreBoardStats } from "@type/data";
+import { StatusBar, View } from "react-native";
 
 type RouteParams = {
   stats: ScoreBoardStats;
@@ -11,11 +12,19 @@ type RouteParams = {
 
 export default function Stats() {
   const route = useRoute();
-  const navigation = useNavigation();
   const statsInfo = route.params as RouteParams;
 
   return (
-    <>
+    <View style={{ backgroundColor: "white", flex: 1 }}>
+      <StatusBar
+        backgroundColor={
+          statsInfo.stats.situation === "ONDIET"
+            ? theme.COLORS.GREEN_LIGHT
+            : theme.COLORS.RED_LIGHT
+        } // cor desejada
+        barStyle="light-content" // ou "dark-content" conforme contraste
+      />
+
       <Header type="statsIsOn" stats={statsInfo.stats} />
       <S.Container>
         <S.StatsLabel>Estatísticas gerais</S.StatsLabel>
@@ -53,6 +62,6 @@ export default function Stats() {
           ></StatsCardLarge>
         </S.ContainerRow>
       </S.Container>
-    </>
+    </View>
   );
 }

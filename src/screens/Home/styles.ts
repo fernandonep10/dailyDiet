@@ -2,8 +2,7 @@ import styled, { css } from "styled-components/native";
 
 export const ContainerHeader = styled.View`
   background-color: ${({ theme }) => theme.COLORS.WHITE};
-  flex: 1;
-  padding: 40px 0px;
+  padding-top: 10px;
 `;
 
 export const mealsLabel = styled.Text`

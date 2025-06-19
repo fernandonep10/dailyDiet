@@ -7,12 +7,10 @@ import { useNavigation } from "@react-navigation/native";
 export type { MealListSectionsPropsData } from "@components/MealsList/types";
 
 export default function MealList({ sections }: MealListPropsData) {
-  //console.log(JSON.stringify(sections));
-
   const navigation = useNavigation();
 
   function handleEditMeal(id: string, date: string) {
-    navigation.navigate("mealDetails", { id, date });
+    navigation.navigate("mealInfo", { id, date });
   }
 
   return (

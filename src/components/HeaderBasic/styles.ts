@@ -8,7 +8,7 @@ export const Container = styled(View)<HeaderBasicStyleContainerProps>`
     css`
       background-color: ${color};
       width: 100%;
-      height: 132px;
+      height: 100px;
       align-items: center;
       justify-content: center;
     `};
@@ -17,7 +17,7 @@ export const Container = styled(View)<HeaderBasicStyleContainerProps>`
 export const goBack = styled(TouchableOpacity)`
   flex: 1;
   position: absolute;
-  top: 49px;
+  top: 35px;
   left: 24px;
 `;
 

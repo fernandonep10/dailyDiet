@@ -2,7 +2,7 @@ import styled, { css } from "styled-components/native";
 import { TextInput, TouchableOpacity } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
 
-export const Container = styled.View`
+export const FormContainer = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.COLORS.WHITE};
   border-radius: 15px;
@@ -10,11 +10,7 @@ export const Container = styled.View`
   top: -15px;
   padding-left: 24px;
   padding-right: 24px;
-  padding-bottom: 30px;
-`;
-
-export const Form = styled.View`
-  flex: 1;
+  flex-direction: column;
 `;
 
 export const InputLabel = styled.Text`

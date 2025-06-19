@@ -42,7 +42,7 @@ export const scoreBoardContainer = styled(View)<scoreBoardProps>`
     background-color: ${stats.situation === "ONDIET"
       ? theme.COLORS.GREEN_LIGHT
       : theme.COLORS.RED_LIGHT};
-    height: ${type === "statsIsOn" ? "180px" : "102px"};
+    height: ${type === "statsIsOn" ? "160px" : "102px"};
     border-radius: 6px;
     align-items: center;
     justify-content: center;

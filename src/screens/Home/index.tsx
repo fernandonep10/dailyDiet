@@ -10,6 +10,8 @@ import { mealsClearAll } from "@storage/meal/mealClearAll";
 import { transformMealsToSectionList, scoreBoardStats } from "@utils/index";
 import { mealProps } from "@type/data";
 import { ScoreBoardStats } from "@type/data";
+import { StatusBar, View } from "react-native";
+import theme from "@theme/index";
 
 export default function Home() {
   const [scoreBord, setScoreBord] = useState<ScoreBoardStats>({
@@ -35,7 +37,7 @@ export default function Home() {
       const mealData: mealProps[] = await mealsGetAll();
       const scoreBordStats = scoreBoardStats(mealData);
 
-      console.log(mealData);
+      //console.log(mealData);
 
       setScoreBord(scoreBordStats);
 
@@ -59,17 +61,24 @@ export default function Home() {
   );
 
   return (
-    <S.ContainerHeader>
-      <Header type={"statsIsOff"} stats={scoreBord} />
+    <View style={{ backgroundColor: "white", flex: 1 }}>
+      <StatusBar
+        backgroundColor={theme.COLORS.WHITE}
+        barStyle="light-content" // ou "dark-content" conforme contraste
+      />
+      <S.ContainerHeader>
+        <Header type={"statsIsOff"} stats={scoreBord} />
+      </S.ContainerHeader>
       <S.CotainerBody>
         <S.mealsLabel>Refeições</S.mealsLabel>
         <ActionButton
           title="Nova Refeição"
           icon="add"
           onPress={handleNewMeal}
+          color="PRIMARY"
         />
         {isLoading ? <Loading /> : <MealList sections={meals} />}
       </S.CotainerBody>
-    </S.ContainerHeader>
+    </View>
   );
 }

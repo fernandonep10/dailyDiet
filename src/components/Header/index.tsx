@@ -3,7 +3,6 @@ import logoImg from "@assets/logo.png";
 import profile from "@assets/profile.png";
 import { useNavigation } from "@react-navigation/native";
 import { ScoreBoardStats } from "@type/data";
-import { Text } from "react-native";
 
 type Props = {
   type: "statsIsOn" | "statsIsOff";

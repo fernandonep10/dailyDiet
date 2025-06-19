@@ -1,4 +1,5 @@
 import { ActivityIndicator } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemeProvider } from "styled-components/native";
 import {
   useFonts,
@@ -14,6 +15,7 @@ import {
 import { Routes } from "@routes/index";
 
 import theme from "@theme/index";
+import { useEffect } from "react";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -23,7 +25,9 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {fontsLoaded ? <Routes /> : <ActivityIndicator />}
+      <SafeAreaView style={{ flex: 1 }}>
+        {fontsLoaded ? <Routes /> : <ActivityIndicator />}
+      </SafeAreaView>
     </ThemeProvider>
   );
 }

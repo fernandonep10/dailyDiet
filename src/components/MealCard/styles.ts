@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components/native";
 import { Circle } from "phosphor-react-native";
-import { MealCardStyleitemProps } from "./types";
 
 export const Container = styled.TouchableOpacity`
   width: 100%;
